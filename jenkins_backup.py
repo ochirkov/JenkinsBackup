@@ -49,7 +49,7 @@ def clean_obsolete():
             os.remove(os.path.join(backup_dir, z))
 
 
-def apply_timastamp():
+def apply_timestamp():
 
     """
     This function generate backup file name
