@@ -11,7 +11,7 @@ parser.add_argument('-P', '--path',
                     help='Path to Jenkins home')
 parser.add_argument('-p', '--prefix',
                     action='store',
-                    default='slon_jenkins_backup',
+                    default='jenkins_backup',
                     help='Prefix name')
 args = vars(parser.parse_args())
 
