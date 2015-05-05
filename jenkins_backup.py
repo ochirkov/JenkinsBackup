@@ -26,7 +26,7 @@ jenkins_parent  =  os.path.abspath(os.path.join(jenkins_home, os.pardir))
 backup_dir      =  os.path.join(jenkins_home, 'backups')
 prefix          =  args.get('prefix')
 suffix          =  'tar.gz'
-
+rotation        =  args.get('rotation')
 
 def check_backup_dir():
 
@@ -45,11 +45,11 @@ def clean_obsolete():
     """
 
     files = [ i for i in os.listdir(backup_dir) if i.startswith(prefix) ]
-    if len(files) > 5:
+    if len(files) > rotation:
         timestamps = [ k.split('_')[-1].split('.')[0] for k in files ]
         dates = [ datetime.strptime(ts, "%Y-%m-%d") for ts in timestamps ]
         dates.sort()
-        last_backups = [ '{0}_{1}.{2}'.format(prefix, x.strftime("%Y-%m-%d"), suffix) for x in dates[-5:] ]
+        last_backups = [ '{0}_{1}.{2}'.format(prefix, x.strftime("%Y-%m-%d"), suffix) for x in dates[-rotation:] ]
         for z in list(set(files) - set(last_backups)):
             os.remove(os.path.join(backup_dir, z))
 
