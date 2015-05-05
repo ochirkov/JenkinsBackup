@@ -13,6 +13,11 @@ parser.add_argument('-p', '--prefix',
                     action='store',
                     default='jenkins_backup',
                     help='Prefix name')
+parser.add_argument('-R', '--rotation',
+                    action='store',
+                    type=int,
+                    default=5,
+                    help='Rotation period in days')                    
 args = vars(parser.parse_args())
 
 # Vars
@@ -67,7 +72,7 @@ def do_backup():
     Add needed dirs which should be excluded to exclude_files list.
     """
 
-    backup_name = apply_timastamp()
+    backup_name = apply_timestamp()
     exclude_files = ['jenkins/backups',
                      'jenkins/.cache',
                      'jenkins/workspace']
